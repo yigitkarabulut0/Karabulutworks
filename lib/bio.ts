@@ -9,10 +9,10 @@ export const bio = {
   longBio:
     "I build software end-to-end and break it when I have to. By day I ship product and platform work as a full-stack engineer at Tebli.co; in parallel I run indie iOS releases — Color Mosaic on the App Store, NineCells and Petto on TestFlight — and lead my own AI side bets. Before this I owned roadmaps as Scrum Master and Product Owner across three AI ventures at Inpocket.ai, and stood up information security from zero at Ganbitera (NFT) and Hafiz Mustafa 1864 — ISO 27001 / 27701 audits, SOC operations and offensive security work. I care about clarity, small teams shipping with conviction, and software that has a point of view.",
   currently: [
-    "Full-stack at Tebli.co",
-    "Shipping indie iOS — NineCells, Petto on TestFlight",
-    "Maintaining Color Mosaic on the App Store",
-    "Open to short, considered consulting engagements",
+    "Hafiz Mustafa 1864",
+    "Color Mosaic",
+    "NineCells",
+    "Petto",
   ],
   location: "London / Istanbul",
   email: "Yigit@Karabulut.work",
