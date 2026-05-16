@@ -133,6 +133,17 @@ html.lenis body {
   will-change: transform;
 }
 
+/* Splash pre-hide — keep DOM clean before GSAP attaches. */
+.splash-word {
+  transform: translateY(110%);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.splash-name-letter {
+  transform: translateY(120%);
+  will-change: transform;
+}
+
 .magnetic-inner {
   display: inline-block;
   will-change: transform;

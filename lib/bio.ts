@@ -7,7 +7,13 @@ export const bio = {
   tagline:
     "Product Owner, Cyber Security Lead & AI builder based between London and Istanbul.",
   longBio:
-    "Yigit is a product builder and security practitioner whose path has been driven by curiosity and a relentless appetite to learn. He ships software end-to-end — currently as a full-stack engineer at Tebli.co, in parallel with his own indie iOS releases — and has led product teams as Scrum Master and Product Owner. Outside product work, he advises companies on cyber security and information governance, leading ISO 27001 and 27701 programmes, SOC operations and offensive security engagements.",
+    "I build software end-to-end and break it when I have to. By day I ship product and platform work as a full-stack engineer at Tebli.co; in parallel I run indie iOS releases — Color Mosaic on the App Store, NineCells and Petto on TestFlight — and lead my own AI side bets. Before this I owned roadmaps as Scrum Master and Product Owner across three AI ventures at Inpocket.ai, and stood up information security from zero at Ganbitera (NFT) and Hafiz Mustafa 1864 — ISO 27001 / 27701 audits, SOC operations and offensive security work. I care about clarity, small teams shipping with conviction, and software that has a point of view.",
+  currently: [
+    "Full-stack at Tebli.co",
+    "Shipping indie iOS — NineCells, Petto on TestFlight",
+    "Maintaining Color Mosaic on the App Store",
+    "Open to short, considered consulting engagements",
+  ],
   location: "London / Istanbul",
   email: "Yigit@Karabulut.work",
   phone: "+44 7386 423863",
@@ -196,4 +202,26 @@ export const marqueeWords: string[] = [
   "Founder",
   "Full-Stack",
   "London / Istanbul",
+];
+
+/**
+ * Pool of role phrases the splash sequence picks from on each fresh load.
+ * Mix of fields (sober) and identity phrases (warm). Three of these are
+ * shuffled into every splash run, so refresh = new flavor.
+ */
+export const splashRoles: string[] = [
+  "Cyber Security",
+  "Software Development",
+  "Scrum Mastery",
+  "Product Strategy",
+  "AI Engineering",
+  "Information Security",
+  "Full-Stack Engineering",
+  "Indie iOS Releases",
+  "Full-Stack Human",
+  "Curious Builder",
+  "Solo Operator",
+  "Generalist by Design",
+  "Maker of Quiet Products",
+  "Shipping in Public",
 ];

@@ -1,11 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { bio } from "@/lib/bio";
+import { bio, splashRoles } from "@/lib/bio";
 
-const SEQUENCE = bio.roles;
 const SESSION_KEY = "yk-splash-seen";
+
+function pickRoles(pool: string[], n: number): string[] {
+  // Fisher–Yates shuffle on a copy
+  const a = [...pool];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a.slice(0, n);
+}
 
 export function Splash() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -16,9 +25,16 @@ export function Splash() {
   const bottomMaskRef = useRef<HTMLDivElement>(null);
   const [skipped, setSkipped] = useState(false);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
+  const playedRef = useRef(false);
+
+  // Pick a fresh set of roles for this mount. Stable across re-renders.
+  const sequence = useMemo(() => pickRoles(splashRoles, 3), []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (playedRef.current) return; // StrictMode double-invoke guard
+    playedRef.current = true;
+
     const seen = sessionStorage.getItem(SESSION_KEY);
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const root = rootRef.current!;
@@ -52,8 +68,9 @@ export function Splash() {
 
       const stamp = stampRef.current!;
       const words = wordsRef.current!.querySelectorAll<HTMLDivElement>(".splash-word");
-      const nameLetters = nameRef.current!.querySelectorAll<HTMLSpanElement>("span > span");
+      const nameLetters = nameRef.current!.querySelectorAll<HTMLSpanElement>(".splash-name-letter");
 
+      // Ensure correct initial state in JS too (CSS already sets transform/opacity).
       gsap.set(words, { yPercent: 110, opacity: 0 });
       gsap.set(nameLetters, { yPercent: 120 });
       gsap.set([topMaskRef.current, bottomMaskRef.current], { yPercent: 0 });
@@ -112,8 +129,7 @@ export function Splash() {
     if (tl) tl.progress(1);
   };
 
-  const name = bio.name;
-  const letters = name.split("");
+  const letters = bio.name.split("");
 
   return (
     <div
@@ -138,13 +154,13 @@ export function Splash() {
           (YK &mdash; 2026)
         </div>
 
-        {/* Role sequence — text-size lives on the container so h:1.3em is correct */}
+        {/* Role sequence — CSS already pre-hides .splash-word so first paint is clean */}
         <div
           ref={wordsRef}
           className="serif-italic relative w-full overflow-hidden text-center text-5xl text-fg md:text-7xl lg:text-8xl"
           style={{ height: "1.3em", lineHeight: 1 }}
         >
-          {SEQUENCE.map((w) => (
+          {sequence.map((w) => (
             <div
               key={w}
               className="splash-word absolute inset-0 flex items-center justify-center"
@@ -175,7 +191,7 @@ export function Splash() {
                 }}
               >
                 <span
-                  className="inline-block"
+                  className="splash-name-letter inline-block"
                   style={{ lineHeight: 1, height: "1.05em" }}
                 >
                   {ch === " " ? " " : ch}

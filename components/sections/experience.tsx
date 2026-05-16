@@ -7,12 +7,42 @@ export function Experience() {
     <section id="about-long" className="py-32 md:py-40">
       <Container>
         <SectionLabel index="02" title="About / Trajectory" />
-        <div className="grid grid-cols-1 gap-y-8 md:grid-cols-12 md:gap-12">
+        <div className="grid grid-cols-1 gap-y-12 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-5">
-            <p className="serif text-2xl leading-snug md:text-[28px]">
-              <RevealText text={bio.longBio} stagger={0.02} duration={0.9} />
+            <p className="serif text-2xl leading-snug md:text-[28px] md:leading-[1.2]">
+              <RevealText text={bio.longBio} stagger={0.015} duration={0.9} />
+            </p>
+
+            {/* Currently */}
+            <div className="mt-10 border-t border-line pt-6">
+              <p className="eyebrow mb-4 flex items-center gap-3">
+                <span className="relative inline-flex h-2 w-2">
+                  <span className="absolute inset-0 animate-ping rounded-full bg-fg opacity-50" />
+                  <span className="relative inline-block h-2 w-2 rounded-full bg-fg" />
+                </span>
+                Currently
+              </p>
+              <ul>
+                {bio.currently.map((c) => (
+                  <li
+                    key={c}
+                    className="flex items-baseline gap-3 border-b border-line py-3 text-[15px] leading-snug text-fg/85"
+                  >
+                    <span aria-hidden className="mono text-[10px] uppercase tracking-widest text-muted">
+                      —
+                    </span>
+                    <span>{c}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Signature line */}
+            <p className="mono mt-8 text-[11px] uppercase tracking-widest text-muted">
+              {bio.location} &middot; b. {bio.yearOfBirth}
             </p>
           </div>
+
           <ol className="md:col-span-7">
             {experience.map((e, i) => (
               <li
