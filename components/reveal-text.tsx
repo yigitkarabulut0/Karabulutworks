@@ -58,12 +58,21 @@ export function RevealText({
     );
 
     if (trigger === "scroll") {
+      const rect = el.getBoundingClientRect();
+      const isAlreadyVisible =
+        rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+
       const st = ScrollTrigger.create({
         trigger: el,
         start: "top 88%",
         once: true,
         onEnter: () => tween.play(),
       });
+
+      if (isAlreadyVisible) {
+        tween.play();
+      }
+
       return () => {
         st.kill();
         tween.kill();

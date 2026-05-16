@@ -1,13 +1,11 @@
 "use client";
 
-import { createContext, useContext, useEffect, useSyncExternalStore } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 type Theme = "dark" | "light";
 type Ctx = { theme: Theme; toggle: () => void; setTheme: (t: Theme) => void };
 
 const ThemeContext = createContext<Ctx | null>(null);
-
-const THEME_EVENT = "yk-theme-change";
 
 function readTheme(): Theme {
   if (typeof window === "undefined") return "dark";
@@ -17,28 +15,19 @@ function readTheme(): Theme {
   return fromDataset === "light" ? "light" : "dark";
 }
 
-function subscribeTheme(onStoreChange: () => void) {
-  window.addEventListener(THEME_EVENT, onStoreChange);
-  window.addEventListener("storage", onStoreChange);
-  return () => {
-    window.removeEventListener(THEME_EVENT, onStoreChange);
-    window.removeEventListener("storage", onStoreChange);
-  };
-}
-
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const theme = useSyncExternalStore<Theme>(subscribeTheme, readTheme, () => "dark");
+  const [theme, setThemeState] = useState<Theme>(readTheme);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
 
   const setTheme = (t: Theme) => {
+    setThemeState(t);
     document.documentElement.dataset.theme = t;
     try {
       localStorage.setItem("yk-theme", t);
     } catch {}
-    window.dispatchEvent(new Event(THEME_EVENT));
   };
 
   const toggle = () => setTheme(theme === "dark" ? "light" : "dark");

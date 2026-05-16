@@ -1,5 +1,4 @@
 import { Container, SectionLabel } from "@/components/container";
-import { RevealText } from "@/components/reveal-text";
 import { bio, experience } from "@/lib/bio";
 
 export function Experience() {
@@ -10,7 +9,7 @@ export function Experience() {
         <div className="grid grid-cols-1 gap-y-12 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-5">
             <p className="serif text-fg text-2xl leading-snug md:text-[28px] md:leading-[1.2]">
-              <RevealText text={bio.longBio} stagger={0.015} duration={0.9} />
+              {bio.longBio}
             </p>
 
             {/* Currently */}
