@@ -7,7 +7,7 @@ export function Experience() {
     <section id="about-long" className="py-32 md:py-40">
       <Container>
         <SectionLabel index="02" title="About / Trajectory" />
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-12">
+        <div className="grid grid-cols-1 gap-y-8 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-5">
             <p className="serif text-2xl leading-snug md:text-[28px]">
               <RevealText text={bio.longBio} stagger={0.02} duration={0.9} />

@@ -48,26 +48,36 @@ export function Hero() {
       <Container className="hero-meta flex items-start justify-between">
         <div>
           <p className="eyebrow">Yigit Karabulut</p>
-          <p className="eyebrow mt-1">Portfolio — Twenty&nbsp;Twenty&nbsp;Six</p>
+          <p className="eyebrow mt-1">Portfolio &mdash; Twenty Twenty Six</p>
         </div>
         <div className="text-right">
           <p className="eyebrow">London / Istanbul</p>
-          <p className="eyebrow mt-1">Available · 2026</p>
+          <p className="eyebrow mt-1">Available &middot; 2026</p>
         </div>
       </Container>
 
       <Container>
         <h1
           aria-label={bio.name}
-          className="hero-name serif select-none leading-[0.86] text-[18vw] md:text-[15vw] lg:text-[13.5vw]"
+          className="hero-name serif select-none text-[18vw] md:text-[15vw] lg:text-[13.5vw]"
+          style={{ lineHeight: 1.05 }}
         >
           {letters.map((ch, i) => (
             <span
               key={i}
-              className="inline-block overflow-hidden align-bottom"
-              style={{ height: "0.9em", lineHeight: "0.9" }}
+              className="inline-block overflow-hidden"
+              style={{
+                height: "1.05em",
+                lineHeight: 1,
+                verticalAlign: "bottom",
+              }}
             >
-              <span className="inline-block">{ch === " " ? " " : ch}</span>
+              <span
+                className="inline-block"
+                style={{ lineHeight: 1, height: "1.05em" }}
+              >
+                {ch === " " ? " " : ch}
+              </span>
             </span>
           ))}
         </h1>

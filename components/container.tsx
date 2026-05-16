@@ -22,7 +22,7 @@ export function SectionLabel({
   title: string;
 }) {
   return (
-    <div className="mb-12 flex items-baseline gap-6 border-t border-line pt-6 md:mb-20">
+    <div className="mb-8 flex items-baseline gap-6 border-t border-line pt-6 md:mb-20">
       <span className="eyebrow">{index}</span>
       <span className="eyebrow">— {title}</span>
     </div>

@@ -58,16 +58,12 @@ export function Splash() {
       gsap.set(nameLetters, { yPercent: 120 });
       gsap.set([topMaskRef.current, bottomMaskRef.current], { yPercent: 0 });
 
-      // stamp in
       tl.fromTo(
         stamp,
         { y: 12, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.5 }
-      )
-        // stamp out
-        .to(stamp, { y: -12, opacity: 0, duration: 0.4 }, "+=0.2");
+      ).to(stamp, { y: -12, opacity: 0, duration: 0.4 }, "+=0.2");
 
-      // role words sequence
       words.forEach((w, i) => {
         const label = `w${i}`;
         tl.addLabel(label, "+=0")
@@ -79,7 +75,6 @@ export function Splash() {
           );
       });
 
-      // name reveal
       tl.to(
         nameLetters,
         {
@@ -91,20 +86,17 @@ export function Splash() {
         "-=0.4"
       );
 
-      // mask split open
       tl.to(
         topMaskRef.current,
         { yPercent: -100, duration: 1.1, ease: "expo.inOut" },
         "+=0.45"
-      ).to(
-        bottomMaskRef.current,
-        { yPercent: 100, duration: 1.1, ease: "expo.inOut" },
-        "<"
-      ).to(
-        nameRef.current,
-        { opacity: 0, duration: 0.6 },
-        "<+=0.2"
-      );
+      )
+        .to(
+          bottomMaskRef.current,
+          { yPercent: 100, duration: 1.1, ease: "expo.inOut" },
+          "<"
+        )
+        .to(nameRef.current, { opacity: 0, duration: 0.6 }, "<+=0.2");
     }, rootRef);
 
     return () => {
@@ -143,35 +135,51 @@ export function Splash() {
           ref={stampRef}
           className="mono absolute top-8 left-1/2 -translate-x-1/2 text-[11px] uppercase tracking-widest text-fg opacity-0"
         >
-          (YK — 2026)
+          (YK &mdash; 2026)
         </div>
 
+        {/* Role sequence — text-size lives on the container so h:1.3em is correct */}
         <div
           ref={wordsRef}
-          className="relative h-[1.2em] w-full overflow-hidden text-center"
+          className="serif-italic relative w-full overflow-hidden text-center text-5xl text-fg md:text-7xl lg:text-8xl"
+          style={{ height: "1.3em", lineHeight: 1 }}
         >
           {SEQUENCE.map((w) => (
             <div
               key={w}
-              className="splash-word serif-italic absolute inset-0 flex items-center justify-center text-5xl md:text-7xl lg:text-8xl text-fg"
+              className="splash-word absolute inset-0 flex items-center justify-center"
+              style={{ lineHeight: 1 }}
             >
               {w}.
             </div>
           ))}
         </div>
 
+        {/* Name reveal */}
         <div
           ref={nameRef}
           className="serif absolute inset-0 flex items-center justify-center px-6 text-center text-fg"
         >
-          <div className="text-[12vw] md:text-[10vw] leading-none">
+          <div
+            className="text-[12vw] md:text-[10vw]"
+            style={{ lineHeight: 1.05 }}
+          >
             {letters.map((ch, i) => (
               <span
                 key={i}
-                className="inline-block overflow-hidden align-bottom"
-                style={{ height: "1em" }}
+                className="inline-block overflow-hidden"
+                style={{
+                  height: "1.05em",
+                  lineHeight: 1,
+                  verticalAlign: "bottom",
+                }}
               >
-                <span className="inline-block">{ch === " " ? " " : ch}</span>
+                <span
+                  className="inline-block"
+                  style={{ lineHeight: 1, height: "1.05em" }}
+                >
+                  {ch === " " ? " " : ch}
+                </span>
               </span>
             ))}
           </div>
@@ -182,7 +190,7 @@ export function Splash() {
           onClick={skip}
           className="mono pointer-events-auto absolute top-8 right-8 text-[11px] uppercase tracking-widest text-muted hover:text-fg transition-colors"
         >
-          Skip ↗
+          Skip &nearr;
         </button>
       </div>
     </div>
