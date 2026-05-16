@@ -3,9 +3,9 @@ export const bio = {
   shortName: "YK",
   dob: "2002-01-31",
   yearOfBirth: 2002,
-  roles: ["Product Owner", "Cyber Security Lead", "AI Enthusiast"],
+  roles: ["Full-Stack Human"],
   tagline:
-    "Product Owner, Cyber Security Lead & AI builder based between London and Istanbul.",
+    "Full-Stack Human building product, security and AI systems between London and Istanbul.",
   longBio:
     "I build software end-to-end and break it when I have to. By day I ship product and platform work as a full-stack engineer at Tebli.co; in parallel I run indie iOS releases — Color Mosaic on the App Store, NineCells and Petto on TestFlight — and lead my own AI side bets. Before this I owned roadmaps as Scrum Master and Product Owner across three AI ventures at Inpocket.ai, and stood up information security from zero at Ganbitera (NFT) and Hafiz Mustafa 1864 — ISO 27001 / 27701 audits, SOC operations and offensive security work. I care about clarity, small teams shipping with conviction, and software that has a point of view.",
   currently: [
@@ -193,9 +193,7 @@ export const experience: {
 ];
 
 export const marqueeWords: string[] = [
-  "Product Owner",
-  "Cyber Security Lead",
-  "AI Enthusiast",
+  "Full-Stack Human",
   "ISO 27001",
   "Scrum Master",
   "Pentest+",

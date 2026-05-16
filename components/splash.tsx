@@ -1,19 +1,15 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { bio, splashRoles } from "@/lib/bio";
+import { bio } from "@/lib/bio";
 
 const SESSION_KEY = "yk-splash-seen";
-
-function pickRoles(pool: string[], n: number): string[] {
-  const a = [...pool];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a.slice(0, n);
-}
+const SPLASH_SEQUENCE = [
+  "Full-Stack Human",
+  "AI Engineering",
+  "Information Security",
+] as const;
 
 export function Splash() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -26,14 +22,9 @@ export function Splash() {
   const quickMonoRef = useRef<HTMLDivElement>(null);
   const [skipped, setSkipped] = useState(false);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
-  const playedRef = useRef(false);
-
-  const sequence = useMemo(() => pickRoles(splashRoles, 3), []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (playedRef.current) return;
-    playedRef.current = true;
 
     const root = rootRef.current;
     if (!root) return;
@@ -41,7 +32,7 @@ export function Splash() {
     const seen = sessionStorage.getItem(SESSION_KEY);
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    const s = isMobile ? 0.78 : 1; // scale durations on mobile
+    const s = isMobile ? 1.05 : 1;
 
     if (reduced) {
       root.style.display = "none";
@@ -130,9 +121,9 @@ export function Splash() {
 
       // role words — explicit ENTER / HOLD / EXIT so each phrase
       // actually reaches full opacity and stays readable for a beat.
-      const enterDur = 0.5 * s;
-      const holdDur = 0.5 * s;
-      const exitDur = 0.5 * s;
+      const enterDur = 0.65 * s;
+      const holdDur = 1.05 * s;
+      const exitDur = 0.45 * s;
 
       words.forEach((w, i) => {
         const label = `w${i}`;
@@ -148,7 +139,7 @@ export function Splash() {
             `${label}+=${enterDur + holdDur}`
           );
         // After last word, leave a slightly longer tail before the name reveal.
-        if (i === words.length - 1) tl.addLabel(`w${i}-end`, `+=${0.05 * s}`);
+        if (i === words.length - 1) tl.addLabel(`w${i}-end`, `+=${0.2 * s}`);
       });
 
       // name reveal — starts gently overlapping the last word's exit
@@ -156,7 +147,7 @@ export function Splash() {
         nameLetters,
         {
           yPercent: 0,
-          duration: 1.0 * s,
+          duration: 1.15 * s,
           stagger: 0.03 * s,
           ease: "expo.out",
         },
@@ -167,7 +158,7 @@ export function Splash() {
       tl.to(
         topMaskRef.current,
         { yPercent: -100, duration: 1.05 * s, ease: "expo.inOut" },
-        `+=${0.45 * s}`
+        `+=${0.75 * s}`
       )
         .to(
           bottomMaskRef.current,
@@ -221,15 +212,16 @@ export function Splash() {
 
         <div
           ref={wordsRef}
-          className="serif-italic relative w-full overflow-hidden text-center text-[14vw] text-fg sm:text-6xl md:text-7xl lg:text-8xl"
-          style={{ height: "1.3em", lineHeight: 1 }}
+          className="serif-italic relative w-full max-w-6xl overflow-hidden text-center text-[clamp(3.25rem,11vw,8rem)] text-fg"
+          style={{ height: "2.35em", lineHeight: 0.96, letterSpacing: 0 }}
         >
-          {sequence.map((w) => (
+          {SPLASH_SEQUENCE.map((w) => (
             <div
               key={w}
-              className="splash-word absolute inset-0 flex items-center justify-center"
+              className="splash-word absolute inset-0 flex items-center justify-center text-balance px-2"
               style={{
-                lineHeight: 1,
+                lineHeight: 0.96,
+                letterSpacing: 0,
                 opacity: 0,
                 transform: "translateY(110%)",
               }}

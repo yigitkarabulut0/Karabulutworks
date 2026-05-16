@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 
 import { ThemeProvider } from "@/components/theme-provider";
@@ -33,17 +32,17 @@ const SITE_URL = "https://karabulut.work";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Yigit Karabulut — Product Owner, Cyber Security Lead, AI Enthusiast",
+    default: "Yigit Karabulut — Full-Stack Human",
     template: "%s · Yigit Karabulut",
   },
   description:
-    "Portfolio of Yigit Karabulut — Product Owner, Cyber Security Lead and AI builder based between London and Istanbul.",
+    "Portfolio of Yigit Karabulut — Full-Stack Human building product, security and AI systems between London and Istanbul.",
   applicationName: "Yigit Karabulut",
   authors: [{ name: "Yigit Karabulut", url: SITE_URL }],
   creator: "Yigit Karabulut",
   keywords: [
     "Yigit Karabulut",
-    "Product Owner",
+    "Full-Stack Human",
     "Cyber Security",
     "AI",
     "Portfolio",
@@ -55,13 +54,13 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: "Yigit Karabulut — Portfolio",
     description:
-      "Product Owner, Cyber Security Lead & AI builder based between London and Istanbul.",
+      "Full-Stack Human building product, security and AI systems between London and Istanbul.",
     siteName: "Yigit Karabulut",
   },
   twitter: {
     card: "summary_large_image",
     title: "Yigit Karabulut — Portfolio",
-    description: "Product Owner, Cyber Security Lead & AI builder.",
+    description: "Full-Stack Human building product, security and AI systems.",
   },
   robots: { index: true, follow: true },
 };
@@ -75,8 +74,6 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-const themeInit = `(function(){try{var t=localStorage.getItem('yk-theme');if(!t){t='dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}if('scrollRestoration' in history){history.scrollRestoration='manual';}try{window.scrollTo(0,0);}catch(e){}})();`;
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -87,11 +84,6 @@ export default function RootLayout({
       data-theme="dark"
       suppressHydrationWarning
     >
-      <head>
-        <Script id="theme-init" strategy="beforeInteractive">
-          {themeInit}
-        </Script>
-      </head>
       <body className="bg-bg text-fg">
         <ThemeProvider>
           <SmoothScroll />
