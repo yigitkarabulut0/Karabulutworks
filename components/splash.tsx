@@ -27,7 +27,6 @@ export function Splash() {
   const tlRef = useRef<gsap.core.Timeline | null>(null);
   const playedRef = useRef(false);
 
-  // Pick a fresh set of roles for this mount. Stable across re-renders.
   const sequence = useMemo(() => pickRoles(splashRoles, 3), []);
 
   useEffect(() => {
@@ -35,27 +34,36 @@ export function Splash() {
     if (playedRef.current) return; // StrictMode double-invoke guard
     playedRef.current = true;
 
+    const root = rootRef.current;
+    if (!root) return;
+
     const seen = sessionStorage.getItem(SESSION_KEY);
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const root = rootRef.current!;
 
-    document.body.style.overflow = "hidden";
-
+    // SEEN or REDUCED MOTION → never show the splash. No flash, no fade.
     if (seen || reduced) {
-      gsap.to(root, {
-        autoAlpha: 0,
-        duration: 0.4,
-        ease: "power2.out",
-        onComplete: () => {
-          root.style.display = "none";
-          document.body.style.overflow = "";
-          sessionStorage.setItem(SESSION_KEY, "1");
-        },
-      });
+      root.style.display = "none";
+      sessionStorage.setItem(SESSION_KEY, "1");
       return;
     }
 
+    document.body.style.overflow = "hidden";
+
     const ctx = gsap.context(() => {
+      const stamp = stampRef.current!;
+      const words = wordsRef.current!.querySelectorAll<HTMLDivElement>(".splash-word");
+      const nameLetters = nameRef.current!.querySelectorAll<HTMLSpanElement>(".splash-name-letter");
+
+      // 1. Set authoritative initial states BEFORE making the root visible.
+      gsap.set(words, { yPercent: 110, opacity: 0 });
+      gsap.set(nameLetters, { yPercent: 120 });
+      gsap.set([topMaskRef.current, bottomMaskRef.current], { yPercent: 0 });
+      gsap.set(stamp, { y: 12, opacity: 0 });
+
+      // 2. NOW reveal the root — nothing inside is visible at this point.
+      root.style.visibility = "visible";
+
+      // 3. Build and play the timeline.
       const tl = gsap.timeline({
         defaults: { ease: "expo.out" },
         onComplete: () => {
@@ -66,20 +74,8 @@ export function Splash() {
       });
       tlRef.current = tl;
 
-      const stamp = stampRef.current!;
-      const words = wordsRef.current!.querySelectorAll<HTMLDivElement>(".splash-word");
-      const nameLetters = nameRef.current!.querySelectorAll<HTMLSpanElement>(".splash-name-letter");
-
-      // Ensure correct initial state in JS too (CSS already sets transform/opacity).
-      gsap.set(words, { yPercent: 110, opacity: 0 });
-      gsap.set(nameLetters, { yPercent: 120 });
-      gsap.set([topMaskRef.current, bottomMaskRef.current], { yPercent: 0 });
-
-      tl.fromTo(
-        stamp,
-        { y: 12, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5 }
-      ).to(stamp, { y: -12, opacity: 0, duration: 0.4 }, "+=0.2");
+      tl.to(stamp, { y: 0, opacity: 1, duration: 0.5 })
+        .to(stamp, { y: -12, opacity: 0, duration: 0.4 }, "+=0.2");
 
       words.forEach((w, i) => {
         const label = `w${i}`;
@@ -135,6 +131,10 @@ export function Splash() {
     <div
       ref={rootRef}
       aria-hidden
+      // Hidden until JS sets the initial GSAP state. Prevents the
+      // first-paint flash where unstyled content appears before CSS or
+      // the GSAP timeline have a chance to set initial transforms.
+      style={{ visibility: "hidden" }}
       className="fixed inset-0 z-[200] pointer-events-none"
     >
       <div
@@ -149,12 +149,12 @@ export function Splash() {
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div
           ref={stampRef}
-          className="mono absolute top-8 left-1/2 -translate-x-1/2 text-[11px] uppercase tracking-widest text-fg opacity-0"
+          className="mono absolute top-8 left-1/2 -translate-x-1/2 text-[11px] uppercase tracking-widest text-fg"
+          style={{ opacity: 0, transform: "translateY(12px) translateX(-50%)" }}
         >
           (YK &mdash; 2026)
         </div>
 
-        {/* Role sequence — CSS already pre-hides .splash-word so first paint is clean */}
         <div
           ref={wordsRef}
           className="serif-italic relative w-full overflow-hidden text-center text-5xl text-fg md:text-7xl lg:text-8xl"
@@ -164,14 +164,17 @@ export function Splash() {
             <div
               key={w}
               className="splash-word absolute inset-0 flex items-center justify-center"
-              style={{ lineHeight: 1 }}
+              style={{
+                lineHeight: 1,
+                opacity: 0,
+                transform: "translateY(110%)",
+              }}
             >
               {w}.
             </div>
           ))}
         </div>
 
-        {/* Name reveal */}
         <div
           ref={nameRef}
           className="serif absolute inset-0 flex items-center justify-center px-6 text-center text-fg"
@@ -192,7 +195,11 @@ export function Splash() {
               >
                 <span
                   className="splash-name-letter inline-block"
-                  style={{ lineHeight: 1, height: "1.05em" }}
+                  style={{
+                    lineHeight: 1,
+                    height: "1.05em",
+                    transform: "translateY(120%)",
+                  }}
                 >
                   {ch === " " ? " " : ch}
                 </span>
