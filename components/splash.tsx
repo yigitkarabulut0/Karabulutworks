@@ -5,21 +5,18 @@ import { gsap } from "gsap";
 import { bio } from "@/lib/bio";
 
 const SESSION_KEY = "yk-splash-seen";
-const SPLASH_SEQUENCE = [
-  "Full-Stack Human",
-  "AI Engineering",
-  "Information Security",
-] as const;
 
 export function Splash() {
   const rootRef = useRef<HTMLDivElement>(null);
-  const stampRef = useRef<HTMLDivElement>(null);
-  const wordsRef = useRef<HTMLDivElement>(null);
-  const nameRef = useRef<HTMLDivElement>(null);
-  const topMaskRef = useRef<HTMLDivElement>(null);
-  const bottomMaskRef = useRef<HTMLDivElement>(null);
-  const quickRef = useRef<HTMLDivElement>(null);
-  const quickMonoRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
+  const markRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const nameRef = useRef<HTMLParagraphElement>(null);
+  const progressRef = useRef<HTMLSpanElement>(null);
+  const leftRuleRef = useRef<HTMLSpanElement>(null);
+  const rightRuleRef = useRef<HTMLSpanElement>(null);
   const [skipped, setSkipped] = useState(false);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
 
@@ -27,12 +24,13 @@ export function Splash() {
     if (typeof window === "undefined") return;
 
     const root = rootRef.current;
-    if (!root) return;
+    const panel = panelRef.current;
+    if (!root || !panel) return;
 
     const seen = sessionStorage.getItem(SESSION_KEY);
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    const s = isMobile ? 1.05 : 1;
+    const speed = isMobile ? 0.95 : 1;
 
     if (reduced) {
       root.style.display = "none";
@@ -45,69 +43,26 @@ export function Splash() {
     const cleanupRoot = () => {
       document.body.style.overflow = "";
       sessionStorage.setItem(SESSION_KEY, "1");
-      if (root) root.style.display = "none";
+      root.style.display = "none";
     };
 
     const ctx = gsap.context(() => {
-      // ── PATH B: REFRESH WIPE (same session) ────────────────────────
-      if (seen) {
-        const quick = quickRef.current!;
-        const mono = quickMonoRef.current!;
+      const introItems = [
+        markRef.current,
+        titleRef.current,
+        subtitleRef.current,
+        nameRef.current,
+      ].filter(Boolean);
 
-        // Quick panel covers everything; mono "YK" briefly shows.
-        gsap.set(quick, { yPercent: 0 });
-        gsap.set(mono, { y: 10, opacity: 0 });
-
-        root.style.visibility = "visible";
-
-        const tl = gsap.timeline({
-          defaults: { ease: "expo.inOut" },
-          onComplete: cleanupRoot,
-        });
-        tlRef.current = tl;
-
-        tl.to(mono, {
-          y: 0,
-          opacity: 1,
-          duration: 0.35 * s,
-          ease: "expo.out",
-        })
-          .to(
-            mono,
-            {
-              y: -10,
-              opacity: 0,
-              duration: 0.3 * s,
-              ease: "expo.in",
-            },
-            `+=${0.18 * s}`
-          )
-          .to(
-            quick,
-            {
-              yPercent: -100,
-              duration: 0.85 * s,
-              ease: "expo.inOut",
-            },
-            `-=${0.12 * s}`
-          );
-
-        return;
-      }
-
-      // ── PATH A: FULL CINEMATIC (fresh session) ────────────────────
-      const stamp = stampRef.current!;
-      const words = wordsRef.current!.querySelectorAll<HTMLDivElement>(".splash-word");
-      const nameLetters = nameRef.current!.querySelectorAll<HTMLSpanElement>(".splash-name-letter");
-
-      // Hide the quick panel off-screen so it doesn't cover the cinematic.
-      gsap.set(quickRef.current, { yPercent: -100 });
-      gsap.set(words, { yPercent: 110, opacity: 0 });
-      gsap.set(nameLetters, { yPercent: 120 });
-      gsap.set([topMaskRef.current, bottomMaskRef.current], { yPercent: 0 });
-      gsap.set(stamp, { y: 12, opacity: 0 });
-
-      root.style.visibility = "visible";
+      gsap.set(root, { autoAlpha: 1, yPercent: 0 });
+      gsap.set(panel, { yPercent: 0 });
+      gsap.set(frameRef.current, { opacity: 0, scale: 0.985 });
+      gsap.set(introItems, { y: 24, opacity: 0 });
+      gsap.set(progressRef.current, { scaleX: 0, transformOrigin: "left center" });
+      gsap.set([leftRuleRef.current, rightRuleRef.current], {
+        scaleX: 0,
+        transformOrigin: "center center",
+      });
 
       const tl = gsap.timeline({
         defaults: { ease: "expo.out" },
@@ -115,58 +70,120 @@ export function Splash() {
       });
       tlRef.current = tl;
 
-      // stamp
-      tl.to(stamp, { y: 0, opacity: 1, duration: 0.35 * s, ease: "expo.out" })
-        .to(stamp, { y: -10, opacity: 0, duration: 0.3 * s, ease: "expo.in" }, `+=${0.2 * s}`);
-
-      // role words — explicit ENTER / HOLD / EXIT so each phrase
-      // actually reaches full opacity and stays readable for a beat.
-      const enterDur = 0.65 * s;
-      const holdDur = 1.05 * s;
-      const exitDur = 0.45 * s;
-
-      words.forEach((w, i) => {
-        const label = `w${i}`;
-        tl.addLabel(label)
+      if (seen) {
+        tl.to(frameRef.current, {
+          opacity: 1,
+          scale: 1,
+          duration: 0.45 * speed,
+        })
           .to(
-            w,
-            { yPercent: 0, opacity: 1, duration: enterDur, ease: "expo.out" },
-            label
+            [markRef.current, titleRef.current],
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.65 * speed,
+              stagger: 0.08 * speed,
+            },
+            "-=0.2"
           )
           .to(
-            w,
-            { yPercent: -110, opacity: 0, duration: exitDur, ease: "expo.in" },
-            `${label}+=${enterDur + holdDur}`
-          );
-        // After last word, leave a slightly longer tail before the name reveal.
-        if (i === words.length - 1) tl.addLabel(`w${i}-end`, `+=${0.2 * s}`);
-      });
+            progressRef.current,
+            {
+              scaleX: 1,
+              duration: 0.95 * speed,
+              ease: "power2.inOut",
+            },
+            "-=0.15"
+          )
+          .to(panel, {
+            yPercent: -100,
+            duration: 1.05 * speed,
+            ease: "expo.inOut",
+          });
 
-      // name reveal — starts gently overlapping the last word's exit
-      tl.to(
-        nameLetters,
-        {
-          yPercent: 0,
-          duration: 1.15 * s,
-          stagger: 0.03 * s,
-          ease: "expo.out",
-        },
-        `-=${0.35 * s}`
-      );
+        return;
+      }
 
-      // mask split + name fade
-      tl.to(
-        topMaskRef.current,
-        { yPercent: -100, duration: 1.05 * s, ease: "expo.inOut" },
-        `+=${0.75 * s}`
-      )
+      tl.to(frameRef.current, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.75 * speed,
+      })
         .to(
-          bottomMaskRef.current,
-          { yPercent: 100, duration: 1.05 * s, ease: "expo.inOut" },
-          "<"
+          [leftRuleRef.current, rightRuleRef.current],
+          {
+            scaleX: 1,
+            duration: 0.8 * speed,
+            ease: "power3.out",
+          },
+          "-=0.35"
         )
-        .to(nameRef.current, { opacity: 0, duration: 0.55 * s }, `<+=${0.2 * s}`);
-    }, rootRef);
+        .to(
+          markRef.current,
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.7 * speed,
+          },
+          "-=0.45"
+        )
+        .to(
+          titleRef.current,
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.95 * speed,
+          },
+          "-=0.3"
+        )
+        .to(
+          subtitleRef.current,
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.75 * speed,
+          },
+          "-=0.35"
+        )
+        .to(
+          nameRef.current,
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.75 * speed,
+          },
+          "-=0.45"
+        )
+        .to(
+          progressRef.current,
+          {
+            scaleX: 1,
+            duration: 2.2 * speed,
+            ease: "power1.inOut",
+          },
+          "+=0.3"
+        )
+        .to(
+          introItems,
+          {
+            y: -18,
+            opacity: 0,
+            duration: 0.75 * speed,
+            stagger: 0.04 * speed,
+            ease: "power3.in",
+          },
+          "+=0.35"
+        )
+        .to(
+          panel,
+          {
+            yPercent: -100,
+            duration: 1.15 * speed,
+            ease: "expo.inOut",
+          },
+          "-=0.25"
+        );
+    }, root);
 
     return () => {
       ctx.revert();
@@ -177,11 +194,8 @@ export function Splash() {
   const skip = () => {
     if (skipped) return;
     setSkipped(true);
-    const tl = tlRef.current;
-    if (tl) tl.progress(1);
+    tlRef.current?.progress(1);
   };
-
-  const letters = bio.name.split("");
 
   return (
     <div
@@ -190,106 +204,68 @@ export function Splash() {
       style={{ visibility: "hidden" }}
       className="fixed inset-0 z-[200] pointer-events-none"
     >
-      {/* Full-cinematic split masks (bottom layer) */}
       <div
-        ref={topMaskRef}
-        className="absolute inset-x-0 top-0 h-1/2 bg-bg pointer-events-auto"
-      />
-      <div
-        ref={bottomMaskRef}
-        className="absolute inset-x-0 bottom-0 h-1/2 bg-bg pointer-events-auto"
-      />
-
-      {/* Cinematic content (mid layer) */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-6">
+        ref={panelRef}
+        className="absolute inset-0 flex items-center justify-center overflow-hidden bg-bg px-6 pointer-events-auto"
+      >
         <div
-          ref={stampRef}
-          className="mono absolute top-[max(2rem,env(safe-area-inset-top))] left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-widest text-fg md:text-[11px]"
-          style={{ opacity: 0, transform: "translate(-50%, 12px)" }}
+          ref={frameRef}
+          className="relative flex min-h-[min(620px,78svh)] w-full max-w-[1180px] flex-col items-center justify-center border-y border-line/80 py-14 text-center md:min-h-[min(680px,76svh)]"
         >
-          (YK — 2026)
-        </div>
+          <span
+            ref={leftRuleRef}
+            className="absolute left-0 top-8 hidden h-px w-[22vw] max-w-80 bg-fg/40 md:block"
+          />
+          <span
+            ref={rightRuleRef}
+            className="absolute right-0 bottom-8 hidden h-px w-[22vw] max-w-80 bg-fg/40 md:block"
+          />
 
-        <div
-          ref={wordsRef}
-          className="serif-italic relative w-full max-w-6xl overflow-hidden text-center text-[clamp(3.25rem,11vw,8rem)] text-fg"
-          style={{ height: "2.35em", lineHeight: 0.96, letterSpacing: 0 }}
-        >
-          {SPLASH_SEQUENCE.map((w) => (
-            <div
-              key={w}
-              className="splash-word absolute inset-0 flex items-center justify-center text-balance px-2"
-              style={{
-                lineHeight: 0.96,
-                letterSpacing: 0,
-                opacity: 0,
-                transform: "translateY(110%)",
-              }}
-            >
-              {w}.
-            </div>
-          ))}
-        </div>
-
-        <div
-          ref={nameRef}
-          className="serif absolute inset-0 flex items-center justify-center px-6 text-center text-fg"
-        >
           <div
-            className="text-[14vw] md:text-[10vw]"
-            style={{ lineHeight: 1.05 }}
+            ref={markRef}
+            className="mono mb-8 text-[10px] uppercase tracking-[0.34em] text-muted md:mb-10 md:text-[11px]"
           >
-            {letters.map((ch, i) => (
-              <span
-                key={i}
-                className="inline-block overflow-hidden"
-                style={{
-                  height: "1.05em",
-                  lineHeight: 1,
-                  verticalAlign: "bottom",
-                }}
-              >
-                <span
-                  className="splash-name-letter inline-block"
-                  style={{
-                    lineHeight: 1,
-                    height: "1.05em",
-                    transform: "translateY(120%)",
-                  }}
-                >
-                  {ch === " " ? " " : ch}
-                </span>
-              </span>
-            ))}
+            YK / Portfolio / 2026
+          </div>
+
+          <h1
+            ref={titleRef}
+            className="serif-italic max-w-5xl text-balance text-[clamp(4.25rem,13vw,12.5rem)] leading-[0.82] text-fg"
+            style={{ letterSpacing: 0 }}
+          >
+            Full-Stack Human
+          </h1>
+
+          <p
+            ref={subtitleRef}
+            className="mono mt-8 max-w-[34rem] text-balance text-[11px] uppercase leading-relaxed tracking-[0.16em] text-muted md:mt-10"
+          >
+            Product instinct, security depth and AI-native software craft.
+          </p>
+
+          <p
+            ref={nameRef}
+            className="serif mt-10 text-2xl leading-none text-fg md:text-4xl"
+          >
+            {bio.name}
+          </p>
+
+          <div className="mt-12 h-px w-full max-w-xs overflow-hidden bg-line md:mt-14 md:max-w-md">
+            <span
+              ref={progressRef}
+              className="block h-full w-full bg-fg"
+              style={{ transform: "scaleX(0)" }}
+            />
           </div>
         </div>
 
         <button
           type="button"
           onClick={skip}
-          className="mono pointer-events-auto absolute top-[max(2rem,env(safe-area-inset-top))] right-6 text-[10px] uppercase tracking-widest text-muted hover:text-fg transition-colors md:right-8 md:text-[11px]"
+          className="mono pointer-events-auto absolute right-6 top-[max(2rem,env(safe-area-inset-top))] text-[10px] uppercase tracking-widest text-muted transition-colors hover:text-fg md:right-8 md:text-[11px]"
         >
-          Skip ↗
+          Skip
         </button>
-      </div>
-
-      {/* Quick-wipe curtain (top layer) — covers everything during refresh */}
-      <div
-        ref={quickRef}
-        className="absolute inset-0 bg-bg pointer-events-auto"
-        style={{ zIndex: 10 }}
-      >
-        <div
-          ref={quickMonoRef}
-          className="absolute inset-0 flex items-center justify-center"
-        >
-          <span
-            className="serif text-fg"
-            style={{ fontSize: "clamp(80px, 14vw, 220px)", lineHeight: 1 }}
-          >
-            YK
-          </span>
-        </div>
       </div>
     </div>
   );
