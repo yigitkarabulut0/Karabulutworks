@@ -124,23 +124,34 @@ export function Splash() {
       });
       tlRef.current = tl;
 
-      tl.to(stamp, { y: 0, opacity: 1, duration: 0.5 * s }).to(
-        stamp,
-        { y: -12, opacity: 0, duration: 0.4 * s },
-        `+=${0.2 * s}`
-      );
+      // stamp
+      tl.to(stamp, { y: 0, opacity: 1, duration: 0.35 * s, ease: "expo.out" })
+        .to(stamp, { y: -10, opacity: 0, duration: 0.3 * s, ease: "expo.in" }, `+=${0.2 * s}`);
+
+      // role words — explicit ENTER / HOLD / EXIT so each phrase
+      // actually reaches full opacity and stays readable for a beat.
+      const enterDur = 0.5 * s;
+      const holdDur = 0.5 * s;
+      const exitDur = 0.5 * s;
 
       words.forEach((w, i) => {
         const label = `w${i}`;
-        tl.addLabel(label, "+=0")
-          .to(w, { yPercent: 0, opacity: 1, duration: 0.7 * s }, label)
+        tl.addLabel(label)
           .to(
             w,
-            { yPercent: -110, opacity: 0, duration: 0.7 * s },
-            i === words.length - 1 ? `${label}+=${0.7 * s}` : `${label}+=${0.55 * s}`
+            { yPercent: 0, opacity: 1, duration: enterDur, ease: "expo.out" },
+            label
+          )
+          .to(
+            w,
+            { yPercent: -110, opacity: 0, duration: exitDur, ease: "expo.in" },
+            `${label}+=${enterDur + holdDur}`
           );
+        // After last word, leave a slightly longer tail before the name reveal.
+        if (i === words.length - 1) tl.addLabel(`w${i}-end`, `+=${0.05 * s}`);
       });
 
+      // name reveal — starts gently overlapping the last word's exit
       tl.to(
         nameLetters,
         {
@@ -149,13 +160,14 @@ export function Splash() {
           stagger: 0.03 * s,
           ease: "expo.out",
         },
-        `-=${0.4 * s}`
+        `-=${0.35 * s}`
       );
 
+      // mask split + name fade
       tl.to(
         topMaskRef.current,
         { yPercent: -100, duration: 1.05 * s, ease: "expo.inOut" },
-        `+=${0.4 * s}`
+        `+=${0.45 * s}`
       )
         .to(
           bottomMaskRef.current,
