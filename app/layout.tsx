@@ -75,7 +75,7 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-const themeInit = `(function(){try{var t=localStorage.getItem('yk-theme');if(!t){t='dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();`;
+const themeInit = `(function(){try{var t=localStorage.getItem('yk-theme');if(!t){t='dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}if('scrollRestoration' in history){history.scrollRestoration='manual';}try{window.scrollTo(0,0);}catch(e){}})();`;
 
 export default function RootLayout({
   children,
