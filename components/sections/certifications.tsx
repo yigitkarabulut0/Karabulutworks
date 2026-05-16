@@ -3,7 +3,7 @@ import { certifications } from "@/lib/bio";
 
 export function Certifications() {
   return (
-    <section id="certifications" className="py-32 md:py-40">
+    <section id="certifications" className="py-20 md:py-40">
       <Container>
         <SectionLabel index="04" title="Certifications" />
         <ul className="border-t border-line">

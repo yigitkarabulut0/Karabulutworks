@@ -81,7 +81,7 @@ export default async function CaseStudyPage({
                   trigger="mount"
                 />
               </h1>
-              <p className="serif-italic mt-8 max-w-[36ch] text-xl leading-snug text-fg/85 md:text-2xl">
+              <p className="serif-italic mt-8 max-w-[36ch] text-xl leading-snug text-fg md:text-2xl">
                 {item.oneLiner}
               </p>
             </div>
@@ -127,7 +127,7 @@ export default async function CaseStudyPage({
                 className={
                   i === 0
                     ? "serif text-2xl leading-[1.35] md:text-[28px]"
-                    : "mt-6 text-lg leading-[1.65] text-fg/85 md:text-xl"
+                    : "mt-6 text-lg leading-[1.65] text-fg md:text-xl"
                 }
               >
                 {p}
@@ -154,7 +154,7 @@ export default async function CaseStudyPage({
                 target="_blank"
                 rel="noreferrer"
                 data-cursor="open"
-                className="serif-italic inline-block text-4xl underline decoration-fg/30 underline-offset-[0.2em] hover:decoration-fg md:text-6xl"
+                className="serif-italic inline-block text-4xl underline decoration-line underline-offset-[0.2em] hover:decoration-fg md:text-6xl"
               >
                 {item.link.label} ↗
               </a>

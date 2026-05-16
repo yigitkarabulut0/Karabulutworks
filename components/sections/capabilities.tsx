@@ -16,7 +16,7 @@ const GROUPS: GroupDef[] = [
 
 export function Capabilities() {
   return (
-    <section id="capabilities" className="py-32 md:py-40">
+    <section id="capabilities" className="py-20 md:py-40">
       <Container>
         <SectionLabel index="03" title="Capabilities" />
 

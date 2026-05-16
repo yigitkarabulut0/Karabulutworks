@@ -87,7 +87,7 @@ export function Cursor() {
       />
       <div
         ref={ringRef}
-        className="yk-cursor pointer-events-none fixed top-0 left-0 z-[100] flex h-10 w-10 items-center justify-center rounded-full border border-fg/80 opacity-0"
+        className="yk-cursor pointer-events-none fixed top-0 left-0 z-[100] flex h-10 w-10 items-center justify-center rounded-full border border-fg opacity-0"
         aria-hidden
       >
         <span

@@ -7,7 +7,7 @@ import { work } from "@/lib/work";
 
 export function WorkList() {
   return (
-    <section id="work" className="py-24 md:py-32">
+    <section id="work" className="py-16 md:py-32">
       <Container>
         <SectionLabel index="01" title="Selected Work" />
         <div className="mb-10 flex items-baseline justify-between border-t border-line pt-6 md:mb-14">

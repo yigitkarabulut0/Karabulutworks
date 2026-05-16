@@ -4,7 +4,7 @@ import { bio } from "@/lib/bio";
 
 export function Intro() {
   return (
-    <section id="about" className="py-32 md:py-48">
+    <section id="about" className="py-20 md:py-48">
       <Container>
         <SectionLabel index="00" title="Index" />
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-12">

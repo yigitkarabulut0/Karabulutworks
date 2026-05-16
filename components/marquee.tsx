@@ -61,10 +61,10 @@ export function Marquee({ items, speed = 60, className }: Props) {
             {items.map((item, i) => (
               <span
                 key={`${row}-${i}`}
-                className="serif-italic flex items-center pr-12 text-7xl md:text-[9rem] lg:text-[12rem] leading-none"
+                className="serif-italic flex items-center pr-8 text-5xl md:pr-12 md:text-[9rem] lg:text-[12rem] leading-none"
               >
                 {item}
-                <span className="mx-12 inline-block h-3 w-3 rounded-full bg-fg align-middle" />
+                <span className="mx-6 inline-block h-2 w-2 rounded-full bg-fg align-middle md:mx-12 md:h-3 md:w-3" />
               </span>
             ))}
           </div>

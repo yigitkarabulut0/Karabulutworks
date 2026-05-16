@@ -43,7 +43,7 @@ export function Hero() {
   return (
     <section
       ref={rootRef}
-      className="relative flex min-h-[100svh] w-full flex-col justify-between overflow-hidden border-b border-line pt-24 pb-10 md:pt-32"
+      className="relative flex min-h-[100svh] w-full flex-col justify-between overflow-hidden border-b border-line pt-20 pb-8 md:pt-32 md:pb-10"
     >
       <Container className="hero-meta flex items-start justify-between">
         <div>

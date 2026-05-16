@@ -4,12 +4,12 @@ import { bio, experience } from "@/lib/bio";
 
 export function Experience() {
   return (
-    <section id="about-long" className="py-32 md:py-40">
+    <section id="about-long" className="py-24 md:py-40">
       <Container>
         <SectionLabel index="02" title="About / Trajectory" />
         <div className="grid grid-cols-1 gap-y-12 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-5">
-            <p className="serif text-2xl leading-snug md:text-[28px] md:leading-[1.2]">
+            <p className="serif text-fg text-2xl leading-snug md:text-[28px] md:leading-[1.2]">
               <RevealText text={bio.longBio} stagger={0.015} duration={0.9} />
             </p>
 
@@ -26,7 +26,7 @@ export function Experience() {
                 {bio.currently.map((c) => (
                   <li
                     key={c}
-                    className="flex items-baseline gap-3 border-b border-line py-3 text-[15px] leading-snug text-fg/85"
+                    className="flex items-baseline gap-3 border-b border-line py-3 text-[15px] leading-snug text-fg"
                   >
                     <span aria-hidden className="mono text-[10px] uppercase tracking-widest text-muted">
                       —
@@ -37,9 +37,8 @@ export function Experience() {
               </ul>
             </div>
 
-            {/* Signature line */}
             <p className="mono mt-8 text-[11px] uppercase tracking-widest text-muted">
-              {bio.location} &middot; b. {bio.yearOfBirth}
+              {bio.location} · b. {bio.yearOfBirth}
             </p>
           </div>
 
@@ -53,13 +52,13 @@ export function Experience() {
                   {e.year}
                 </span>
                 <div className="col-span-9 md:col-span-10">
-                  <p className="serif text-2xl leading-tight md:text-3xl">
+                  <p className="serif text-fg text-2xl leading-tight md:text-3xl">
                     {e.company}
                   </p>
                   <p className="mono mt-1 text-[11px] uppercase tracking-widest text-muted">
                     {e.role}
                   </p>
-                  <p className="mt-3 max-w-prose text-[15px] leading-relaxed text-fg/80">
+                  <p className="mt-3 max-w-prose text-[15px] leading-relaxed text-fg">
                     {e.blurb}
                   </p>
                 </div>

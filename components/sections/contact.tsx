@@ -6,7 +6,7 @@ import { bio } from "@/lib/bio";
 
 export function Contact() {
   return (
-    <section id="contact" className="py-32 md:py-48">
+    <section id="contact" className="py-20 md:py-48">
       <Container>
         <SectionLabel index="05" title="Contact" />
         <div className="flex flex-col items-center gap-12 text-center">
@@ -18,7 +18,7 @@ export function Contact() {
             <a
               href={bio.socials.email.url}
               data-cursor="email"
-              className="serif inline-block text-2xl underline decoration-fg/30 underline-offset-[0.25em] hover:decoration-fg transition-colors md:text-4xl"
+              className="serif inline-block text-2xl underline decoration-line underline-offset-[0.25em] hover:decoration-fg transition-colors md:text-4xl"
             >
               {bio.email}
             </a>
