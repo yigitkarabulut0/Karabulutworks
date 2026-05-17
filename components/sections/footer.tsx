@@ -2,7 +2,6 @@
 
 import { Container } from "@/components/container";
 import { Magnetic } from "@/components/magnetic";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 export function Footer() {
   return (
@@ -15,7 +14,6 @@ export function Footer() {
           London / Istanbul
         </p>
         <div className="flex items-center gap-4">
-          <ThemeToggle />
           <Magnetic strength={0.3}>
             <button
               type="button"

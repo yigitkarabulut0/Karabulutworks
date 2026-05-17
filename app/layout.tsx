@@ -81,7 +81,6 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
-      data-theme="dark"
       suppressHydrationWarning
     >
       <body className="bg-bg text-fg">
