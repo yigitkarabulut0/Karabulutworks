@@ -82,12 +82,12 @@ export function Cursor() {
     <>
       <div
         ref={dotRef}
-        className="yk-cursor pointer-events-none fixed top-0 left-0 z-[100] h-1.5 w-1.5 rounded-full bg-fg opacity-0"
+        className="yk-cursor pointer-events-none fixed top-0 left-0 z-[300] h-1.5 w-1.5 rounded-full bg-fg opacity-0"
         aria-hidden
       />
       <div
         ref={ringRef}
-        className="yk-cursor pointer-events-none fixed top-0 left-0 z-[100] flex h-10 w-10 items-center justify-center rounded-full border border-fg opacity-0"
+        className="yk-cursor pointer-events-none fixed top-0 left-0 z-[300] flex h-10 w-10 items-center justify-center rounded-full border border-fg opacity-0"
         aria-hidden
       >
         <span
