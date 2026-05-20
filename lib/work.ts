@@ -19,6 +19,10 @@ export type WorkItem = {
   icon?: string;
   /** Initials fallback when no icon is provided. */
   initials?: string;
+  /** App Store screenshots per locale. */
+  screenshots?: { tr: string[]; en: string[]; pt: string[] };
+  /** Support URL for App Store listing. */
+  supportUrl?: string;
 };
 
 export const work: WorkItem[] = [
@@ -86,6 +90,27 @@ export const work: WorkItem[] = [
     accent: { from: "#1E1B4B", to: "#312E81", fg: "#EDE9FE" },
     icon: "/work/ninecells-icon.png",
     initials: "9C",
+    screenshots: {
+      tr: [
+        "/work/ninecells/tr/01-device-bottom.jpg",
+        "/work/ninecells/tr/02-device-bottom.jpg",
+        "/work/ninecells/tr/03-device-bottom.jpg",
+        "/work/ninecells/tr/04-device-bottom.jpg",
+      ],
+      en: [
+        "/work/ninecells/en/01-device-bottom.jpg",
+        "/work/ninecells/en/02-device-bottom.jpg",
+        "/work/ninecells/en/03-device-bottom.jpg",
+        "/work/ninecells/en/04-device-bottom.jpg",
+      ],
+      pt: [
+        "/work/ninecells/pt/01-device-bottom.jpg",
+        "/work/ninecells/pt/02-device-bottom.jpg",
+        "/work/ninecells/pt/03-device-bottom.jpg",
+        "/work/ninecells/pt/04-device-bottom.jpg",
+      ],
+    },
+    supportUrl: "https://karabulut.work/ninecells/supporturl",
   },
   {
     slug: "petto",
