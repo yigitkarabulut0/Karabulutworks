@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 import { Container } from "@/components/container";
 import { Magnetic } from "@/components/magnetic";
@@ -101,18 +102,41 @@ export default async function CaseStudyPage({
       {showPreview && (
         <section className="pb-16 md:pb-24">
           <Container>
-            <DevicePreview
-              title={item.title}
-              accent={item.accent ?? { from: "#0a0a0a", to: "#1a1a1a" }}
-              icon={item.icon}
-              initials={item.initials}
-              status={item.status}
-              className="mx-auto h-[60vh] min-h-[420px] w-full max-w-[920px] rounded-2xl border border-line bg-fg/[0.02] py-8"
-              variant="phone"
-            />
-            <p className="mono mt-3 text-center text-[10px] uppercase tracking-[0.2em] text-muted">
-              Preview · brand-accurate stand-in
-            </p>
+            {item.slug === "ninecells" && item.screenshots?.en ? (
+              <>
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+                  {item.screenshots.en.map((src, i) => (
+                    <div key={i} className="overflow-hidden rounded-2xl border border-line">
+                      <Image
+                        src={src}
+                        alt={`${item.title} screenshot ${i + 1}`}
+                        width={320}
+                        height={693}
+                        className="h-auto w-full"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <p className="mono mt-3 text-center text-[10px] uppercase tracking-[0.2em] text-muted">
+                  App Store Screenshots
+                </p>
+              </>
+            ) : (
+              <>
+                <DevicePreview
+                  title={item.title}
+                  accent={item.accent ?? { from: "#0a0a0a", to: "#1a1a1a" }}
+                  icon={item.icon}
+                  initials={item.initials}
+                  status={item.status}
+                  className="mx-auto h-[60vh] min-h-[420px] w-full max-w-[920px] rounded-2xl border border-line bg-fg/[0.02] py-8"
+                  variant="phone"
+                />
+                <p className="mono mt-3 text-center text-[10px] uppercase tracking-[0.2em] text-muted">
+                  Preview · brand-accurate stand-in
+                </p>
+              </>
+            )}
           </Container>
         </section>
       )}
