@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "NineCells - Suporte",
-  description: "Página de suporte do jogo NineCells Sudoku. Contato: yigit@karabulut.work",
+  title: "NineCells - Support",
+  description: "NineCells Sudoku game support page. Contact: yigit@karabulut.work",
 };
 
 const screenshots = [
@@ -24,7 +24,7 @@ export default function NineCellsSupportPT() {
             NineCells
           </h1>
           <p className="text-lg text-neutral-400">
-            Sudoku moderno — Tipografia limpa, ritmo calmo, companion watchOS e Live Activities.
+            Sudoku moderno — Tipografia limpa, ritmo calmo, app para watchOS e Live Activities.
           </p>
         </div>
 
@@ -34,7 +34,7 @@ export default function NineCellsSupportPT() {
             <div key={i} className="overflow-hidden rounded-xl">
               <Image
                 src={src}
-                alt={`NineCells captura de tela ${i + 1}`}
+                alt={`Captura de tela do NineCells ${i + 1}`}
                 width={320}
                 height={693}
                 className="h-auto w-full"
@@ -47,7 +47,7 @@ export default function NineCellsSupportPT() {
         <div className="rounded-xl border border-neutral-800 bg-neutral-900/50 p-8 text-center">
           <h2 className="mb-2 text-xl font-light">Suporte & Contato</h2>
           <p className="mb-4 text-neutral-400">
-            Para dúvidas, sugestões ou relatórios de bugs, entre em contato conosco.
+            Para dúvidas, sugestões ou relatos de erros, entre em contato.
           </p>
           <a
             href="mailto:yigit@karabulut.work"
@@ -58,7 +58,7 @@ export default function NineCellsSupportPT() {
         </div>
 
         {/* Language Switcher */}
-        <div className="mt-8 flex justify-center gap-4 text-sm text-neutral-500">
+        <div className="mt-8 flex flex-wrap justify-center gap-2 text-sm text-neutral-500">
           <Link href="/ninecells/supporturl-en" className="hover:text-neutral-300">
             English
           </Link>
@@ -68,11 +68,63 @@ export default function NineCellsSupportPT() {
           </Link>
           <span>•</span>
           <span className="text-neutral-300">Português</span>
+          <span>•</span>
+          <Link href="/ninecells/supporturl-ja" className="hover:text-neutral-300">
+            日本語
+          </Link>
+          <span>•</span>
+          <Link href="/ninecells/supporturl-zh" className="hover:text-neutral-300">
+            简体中文
+          </Link>
+          <span>•</span>
+          <Link href="/ninecells/supporturl-ko" className="hover:text-neutral-300">
+            한국어
+          </Link>
+          <span>•</span>
+          <Link href="/ninecells/supporturl-de" className="hover:text-neutral-300">
+            Deutsch
+          </Link>
+          <span>•</span>
+          <Link href="/ninecells/supporturl-fr" className="hover:text-neutral-300">
+            Français
+          </Link>
+          <span>•</span>
+          <Link href="/ninecells/supporturl-es" className="hover:text-neutral-300">
+            Español
+          </Link>
+          <span>•</span>
+          <Link href="/ninecells/supporturl-it" className="hover:text-neutral-300">
+            Italiano
+          </Link>
+          <span>•</span>
+          <Link href="/ninecells/supporturl-ru" className="hover:text-neutral-300">
+            Русский
+          </Link>
+          <span>•</span>
+          <Link href="/ninecells/supporturl-es-mx" className="hover:text-neutral-300">
+            Español (MX)
+          </Link>
+          <span>•</span>
+          <Link href="/ninecells/supporturl-ar" className="hover:text-neutral-300">
+            العربية
+          </Link>
+          <span>•</span>
+          <Link href="/ninecells/supporturl-hi" className="hover:text-neutral-300">
+            हिन्दी
+          </Link>
+          <span>•</span>
+          <Link href="/ninecells/supporturl-id" className="hover:text-neutral-300">
+            Indonesia
+          </Link>
+          <span>•</span>
+          <Link href="/ninecells/supporturl-vi" className="hover:text-neutral-300">
+            Tiếng Việt
+          </Link>
         </div>
 
         {/* Footer */}
         <div className="mt-12 text-center text-xs text-neutral-600">
-          <p>© 2025 Yigit Karabulut. Todos os direitos reservados.</p>
+          <p>© 2026 Yigit Karabulut. Todos os direitos reservados.</p>
           <Link href="https://karabulut.work" className="mt-2 inline-block hover:text-neutral-400">
             karabulut.work
           </Link>

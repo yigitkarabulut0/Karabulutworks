@@ -6,90 +6,90 @@ export const metadata: Metadata = {
   description: "Privacy Policy for the NineCells Sudoku game.",
 };
 
-export default function NineCellsPrivacyTR() {
+export default function NineCellsPrivacyVI() {
   return (
     <main className="min-h-screen bg-[#0A0A0A] text-white">
       <div className="mx-auto max-w-3xl px-6 py-16">
         {/* Header */}
         <div className="mb-12">
           <h1 className="mb-2 text-4xl font-light tracking-tight md:text-5xl">
-            Gizlilik Politikası
+            Chính sách bảo mật
           </h1>
           <p className="text-sm text-neutral-500">
-            NineCells · Yürürlük tarihi 21 Mayıs 2026
+            NineCells · Có hiệu lực từ ngày 21 tháng 5 năm 2026
           </p>
         </div>
 
         {/* Body */}
         <div className="space-y-8 text-neutral-300 leading-relaxed">
           <section>
-            <p dangerouslySetInnerHTML={{ __html: 'Bu Gizlilik Politikası, NineCells mobil uygulamasının (“Uygulama”) bilgileri nasıl ele aldığını açıklar. NineCells, Yigit Karabulut (“Geliştirici”) tarafından geliştirilen, önce çevrimdışı çalışmaya yönelik bir Sudoku oyunudur.' }} />
+            <p dangerouslySetInnerHTML={{ __html: 'Chính sách bảo mật này mô tả cách ứng dụng di động NineCells (“Ứng dụng”) xử lý thông tin. NineCells là một trò chơi Sudoku ưu tiên ngoại tuyến do Yigit Karabulut (“Nhà phát triển”) phát triển.' }} />
           </section>
 
           <section>
             <h2 className="mb-3 text-xl font-light text-white">
-              1. Toplamadığımız Bilgiler
+              1. Thông tin chúng tôi không thu thập
             </h2>
-            <p dangerouslySetInnerHTML={{ __html: 'NineCells, kimliği belirleyebilen <strong>hiçbir</strong> bilgiyi toplamaz, saklamaz, satmaz veya paylaşmaz. Uygulama hesap gerektirmez; adınızı, e-postanızı, telefon numaranızı veya konumunuzu istemez ve üçüncü taraf reklam ya da analiz SDK’sı içermez.' }} />
+            <p dangerouslySetInnerHTML={{ __html: 'NineCells <strong>không</strong> thu thập, lưu trữ, bán hoặc chia sẻ bất kỳ thông tin nhận dạng cá nhân nào. Ứng dụng không yêu cầu tài khoản, không hỏi tên, email, điện thoại hoặc vị trí của bạn và không chứa SDK quảng cáo hoặc phân tích của bên thứ ba.' }} />
           </section>
 
           <section>
             <h2 className="mb-3 text-xl font-light text-white">
-              2. Cihazınızda Yerel Olarak Saklanan Veriler
+              2. Dữ liệu được lưu cục bộ trên thiết bị
             </h2>
-            <p dangerouslySetInnerHTML={{ __html: 'Oyun deneyimini sağlamak için Uygulama aşağıdaki verileri <strong>yalnızca cihazınızda</strong> saklar:' }} />
+            <p dangerouslySetInnerHTML={{ __html: 'Để mang lại trải nghiệm chơi, Ứng dụng lưu các dữ liệu sau <strong>chỉ trên thiết bị của bạn</strong>:' }} />
             <ul className="mt-3 list-disc space-y-2 pl-6">
-              <li>Oyun ilerlemesi (mevcut puzzle, tahta durumu, süre)</li>
-              <li>İstatistikler (tamamlanan puzzle’lar, en iyi süreler, seriler)</li>
-              <li>Uygulama tercihleri (tema, ses, titreşim, zorluk)</li>
+              <li>Tiến trình chơi (câu đố hiện tại, trạng thái bảng, đồng hồ)</li>
+              <li>Thống kê (câu đố đã hoàn thành, thời gian tốt nhất, chuỗi)</li>
+              <li>Tuỳ chọn (chủ đề, âm thanh, rung phản hồi, độ khó)</li>
             </ul>
             <p className="mt-3">
-              Uygulama için iCloud’u etkinleştirmediğiniz sürece bu veriler cihazınızdan ayrılmaz; etkinleştirdiğinizde Apple’ın iCloud hizmeti üzerinden yalnızca kendi Apple cihazlarınız arasında senkronize edilir.
+              Những dữ liệu này không rời khỏi thiết bị của bạn trừ khi bạn bật iCloud cho Ứng dụng; khi đó, dữ liệu được đồng bộ giữa các thiết bị Apple của bạn qua dịch vụ iCloud của Apple.
             </p>
           </section>
 
           <section>
             <h2 className="mb-3 text-xl font-light text-white">
-              3. iCloud Senkronu
+              3. Đồng bộ iCloud
             </h2>
             <p>
-              iOS ayarlarınızdan NineCells için iCloud’u açtığınızda oyun verileriniz özel iCloud konteynerinizde saklanır ve Apple’ın gizlilik politikası kapsamında Apple tarafından işlenir. Geliştiricinin bu verilere erişimi yoktur.
+              Nếu bạn bật iCloud cho NineCells trong cài đặt iOS, dữ liệu trò chơi của bạn được lưu trong container iCloud riêng tư và do Apple xử lý theo chính sách bảo mật của Apple. Nhà phát triển không có quyền truy cập.
             </p>
           </section>
 
           <section>
             <h2 className="mb-3 text-xl font-light text-white">
-              4. Apple Servisleri
+              4. Dịch vụ của Apple
             </h2>
             <p>
-              Uygulama, Live Activities, watchOS bağlantısı ve Game Center gibi standart Apple sistem servislerini kullanabilir (uygunsa). Bu servislerin işlediği veriler Apple’ın kendi gizlilik politikasına tabidir.
+              Ứng dụng có thể sử dụng các dịch vụ Apple tiêu chuẩn như Live Activities, kết nối watchOS và Game Center (nếu có). Mọi dữ liệu mà các dịch vụ này xử lý đều tuân theo chính sách bảo mật của Apple.
             </p>
           </section>
 
           <section>
             <h2 className="mb-3 text-xl font-light text-white">
-              5. Çocukların Gizliliği
+              5. Quyền riêng tư của trẻ em
             </h2>
             <p>
-              NineCells her yaş için uygundur ve çocuklardan bilerek herhangi bir bilgi toplamaz.
+              NineCells phù hợp với mọi lứa tuổi và không cố ý thu thập thông tin từ trẻ em.
             </p>
           </section>
 
           <section>
             <h2 className="mb-3 text-xl font-light text-white">
-              6. Bu Politikadaki Değişiklikler
+              6. Thay đổi chính sách
             </h2>
             <p>
-              Bu politika, yeni Uygulama özelliklerini veya yasal gereklilikleri yansıtmak üzere zaman zaman güncellenebilir. En güncel sürüm her zaman bu adreste bulunur.
+              Chính sách này có thể được cập nhật theo thời gian để phản ánh tính năng mới hoặc yêu cầu pháp lý. Phiên bản mới nhất luôn có sẵn tại URL này.
             </p>
           </section>
 
           <section>
             <h2 className="mb-3 text-xl font-light text-white">
-              7. İletişim
+              7. Liên hệ
             </h2>
             <p>
-              Bu Gizlilik Politikası hakkında sorularınız için iletişim:
+              Mọi câu hỏi về chính sách này, vui lòng liên hệ:
             </p>
             <p className="mt-2">
               <a
@@ -108,7 +108,9 @@ export default function NineCellsPrivacyTR() {
             English
           </Link>
           <span>•</span>
-          <span className="text-neutral-300">Türkçe</span>
+          <Link href="/ninecells/privacy-tr" className="hover:text-neutral-300">
+            Türkçe
+          </Link>
           <span>•</span>
           <Link href="/ninecells/privacy-pt" className="hover:text-neutral-300">
             Português
@@ -162,14 +164,12 @@ export default function NineCellsPrivacyTR() {
             Indonesia
           </Link>
           <span>•</span>
-          <Link href="/ninecells/privacy-vi" className="hover:text-neutral-300">
-            Tiếng Việt
-          </Link>
+          <span className="text-neutral-300">Tiếng Việt</span>
         </div>
 
         {/* Footer */}
         <div className="mt-12 text-center text-xs text-neutral-600">
-          <p>© 2026 Yigit Karabulut. Tüm hakları saklıdır.</p>
+          <p>© 2026 Yigit Karabulut. Bảo lưu mọi quyền.</p>
           <Link
             href="https://karabulut.work"
             className="mt-2 inline-block hover:text-neutral-400"

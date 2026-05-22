@@ -8,15 +8,15 @@ export const metadata: Metadata = {
 };
 
 const screenshots = [
-  "/work/ninecells/tr/01-device-bottom.jpg",
-  "/work/ninecells/tr/02-device-bottom.jpg",
-  "/work/ninecells/tr/03-device-bottom.jpg",
-  "/work/ninecells/tr/04-device-bottom.jpg",
+  "/work/ninecells/ar/01-device-bottom.jpg",
+  "/work/ninecells/ar/02-device-bottom.jpg",
+  "/work/ninecells/ar/03-device-bottom.jpg",
+  "/work/ninecells/ar/04-device-bottom.jpg",
 ];
 
-export default function NineCellsSupportTR() {
+export default function NineCellsSupportAR() {
   return (
-    <main className="min-h-screen bg-[#0A0A0A] text-white">
+    <main className="min-h-screen bg-[#0A0A0A] text-white" dir="rtl">
       <div className="mx-auto max-w-4xl px-6 py-16">
         {/* Header */}
         <div className="mb-12 text-center">
@@ -24,7 +24,7 @@ export default function NineCellsSupportTR() {
             NineCells
           </h1>
           <p className="text-lg text-neutral-400">
-            Modern Sudoku — Temiz tipografi, sakin tempo, watchOS desteği ve Live Activities.
+            سودوكو عصري — طباعة نظيفة وإيقاع هادئ، مع تطبيق watchOS و Live Activities.
           </p>
         </div>
 
@@ -34,7 +34,7 @@ export default function NineCellsSupportTR() {
             <div key={i} className="overflow-hidden rounded-xl">
               <Image
                 src={src}
-                alt={`NineCells ekran görüntüsü ${i + 1}`}
+                alt={`لقطة شاشة من NineCells ${i + 1}`}
                 width={320}
                 height={693}
                 className="h-auto w-full"
@@ -45,9 +45,9 @@ export default function NineCellsSupportTR() {
 
         {/* Contact */}
         <div className="rounded-xl border border-neutral-800 bg-neutral-900/50 p-8 text-center">
-          <h2 className="mb-2 text-xl font-light">Destek & İletişim</h2>
+          <h2 className="mb-2 text-xl font-light">الدعم والتواصل</h2>
           <p className="mb-4 text-neutral-400">
-            Sorularınız, önerileriniz veya hata bildirimleriniz için bizimle iletişime geçin.
+            لأي أسئلة أو اقتراحات أو الإبلاغ عن الأخطاء، تواصل معنا.
           </p>
           <a
             href="mailto:yigit@karabulut.work"
@@ -63,7 +63,9 @@ export default function NineCellsSupportTR() {
             English
           </Link>
           <span>•</span>
-          <span className="text-neutral-300">Türkçe</span>
+          <Link href="/ninecells/supporturl-tr" className="hover:text-neutral-300">
+            Türkçe
+          </Link>
           <span>•</span>
           <Link href="/ninecells/supporturl-pt" className="hover:text-neutral-300">
             Português
@@ -105,9 +107,7 @@ export default function NineCellsSupportTR() {
             Español (MX)
           </Link>
           <span>•</span>
-          <Link href="/ninecells/supporturl-ar" className="hover:text-neutral-300">
-            العربية
-          </Link>
+          <span className="text-neutral-300">العربية</span>
           <span>•</span>
           <Link href="/ninecells/supporturl-hi" className="hover:text-neutral-300">
             हिन्दी
@@ -124,7 +124,7 @@ export default function NineCellsSupportTR() {
 
         {/* Footer */}
         <div className="mt-12 text-center text-xs text-neutral-600">
-          <p>© 2026 Yigit Karabulut. Tüm hakları saklıdır.</p>
+          <p>© 2026 Yigit Karabulut. جميع الحقوق محفوظة.</p>
           <Link href="https://karabulut.work" className="mt-2 inline-block hover:text-neutral-400">
             karabulut.work
           </Link>

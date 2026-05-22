@@ -6,90 +6,90 @@ export const metadata: Metadata = {
   description: "Privacy Policy for the NineCells Sudoku game.",
 };
 
-export default function NineCellsPrivacyTR() {
+export default function NineCellsPrivacyESMX() {
   return (
     <main className="min-h-screen bg-[#0A0A0A] text-white">
       <div className="mx-auto max-w-3xl px-6 py-16">
         {/* Header */}
         <div className="mb-12">
           <h1 className="mb-2 text-4xl font-light tracking-tight md:text-5xl">
-            Gizlilik Politikası
+            Política de privacidad
           </h1>
           <p className="text-sm text-neutral-500">
-            NineCells · Yürürlük tarihi 21 Mayıs 2026
+            NineCells · Vigente desde el 21 de mayo de 2026
           </p>
         </div>
 
         {/* Body */}
         <div className="space-y-8 text-neutral-300 leading-relaxed">
           <section>
-            <p dangerouslySetInnerHTML={{ __html: 'Bu Gizlilik Politikası, NineCells mobil uygulamasının (“Uygulama”) bilgileri nasıl ele aldığını açıklar. NineCells, Yigit Karabulut (“Geliştirici”) tarafından geliştirilen, önce çevrimdışı çalışmaya yönelik bir Sudoku oyunudur.' }} />
+            <p dangerouslySetInnerHTML={{ __html: 'Esta política de privacidad describe cómo la aplicación móvil NineCells (la “App”) maneja la información. NineCells es un juego de Sudoku offline-first desarrollado por Yigit Karabulut (el “Desarrollador”).' }} />
           </section>
 
           <section>
             <h2 className="mb-3 text-xl font-light text-white">
-              1. Toplamadığımız Bilgiler
+              1. Información que no recopilamos
             </h2>
-            <p dangerouslySetInnerHTML={{ __html: 'NineCells, kimliği belirleyebilen <strong>hiçbir</strong> bilgiyi toplamaz, saklamaz, satmaz veya paylaşmaz. Uygulama hesap gerektirmez; adınızı, e-postanızı, telefon numaranızı veya konumunuzu istemez ve üçüncü taraf reklam ya da analiz SDK’sı içermez.' }} />
+            <p dangerouslySetInnerHTML={{ __html: 'NineCells <strong>no</strong> recopila, almacena, vende ni comparte información que identifique a la persona. La App no requiere cuenta, no pide nombre, correo, teléfono ni ubicación, y no contiene SDKs de publicidad o analítica de terceros.' }} />
           </section>
 
           <section>
             <h2 className="mb-3 text-xl font-light text-white">
-              2. Cihazınızda Yerel Olarak Saklanan Veriler
+              2. Datos almacenados localmente en tu dispositivo
             </h2>
-            <p dangerouslySetInnerHTML={{ __html: 'Oyun deneyimini sağlamak için Uygulama aşağıdaki verileri <strong>yalnızca cihazınızda</strong> saklar:' }} />
+            <p dangerouslySetInnerHTML={{ __html: 'Para brindar la experiencia de juego, la App almacena los siguientes datos <strong>solo en tu dispositivo</strong>:' }} />
             <ul className="mt-3 list-disc space-y-2 pl-6">
-              <li>Oyun ilerlemesi (mevcut puzzle, tahta durumu, süre)</li>
-              <li>İstatistikler (tamamlanan puzzle’lar, en iyi süreler, seriler)</li>
-              <li>Uygulama tercihleri (tema, ses, titreşim, zorluk)</li>
+              <li>Progreso de juego (puzzle actual, estado del tablero, temporizador)</li>
+              <li>Estadísticas (puzzles completados, mejores tiempos, rachas)</li>
+              <li>Preferencias (tema, sonido, hápticos, dificultad)</li>
             </ul>
             <p className="mt-3">
-              Uygulama için iCloud’u etkinleştirmediğiniz sürece bu veriler cihazınızdan ayrılmaz; etkinleştirdiğinizde Apple’ın iCloud hizmeti üzerinden yalnızca kendi Apple cihazlarınız arasında senkronize edilir.
+              Estos datos no salen de tu dispositivo a menos que tengas iCloud activado para la App; en ese caso se sincronizan entre tus propios dispositivos Apple mediante el servicio iCloud de Apple.
             </p>
           </section>
 
           <section>
             <h2 className="mb-3 text-xl font-light text-white">
-              3. iCloud Senkronu
+              3. Sincronización con iCloud
             </h2>
             <p>
-              iOS ayarlarınızdan NineCells için iCloud’u açtığınızda oyun verileriniz özel iCloud konteynerinizde saklanır ve Apple’ın gizlilik politikası kapsamında Apple tarafından işlenir. Geliştiricinin bu verilere erişimi yoktur.
+              Si activas iCloud para NineCells en los ajustes de iOS, tus datos de juego se almacenan en tu contenedor privado de iCloud y los administra Apple bajo su política de privacidad. El Desarrollador no tiene acceso a ellos.
             </p>
           </section>
 
           <section>
             <h2 className="mb-3 text-xl font-light text-white">
-              4. Apple Servisleri
+              4. Servicios de Apple
             </h2>
             <p>
-              Uygulama, Live Activities, watchOS bağlantısı ve Game Center gibi standart Apple sistem servislerini kullanabilir (uygunsa). Bu servislerin işlediği veriler Apple’ın kendi gizlilik politikasına tabidir.
+              La App puede usar servicios estándar de Apple como Live Activities, conectividad watchOS y Game Center (cuando aplique). Cualquier dato procesado por estos servicios se rige por la política de privacidad de Apple.
             </p>
           </section>
 
           <section>
             <h2 className="mb-3 text-xl font-light text-white">
-              5. Çocukların Gizliliği
+              5. Privacidad infantil
             </h2>
             <p>
-              NineCells her yaş için uygundur ve çocuklardan bilerek herhangi bir bilgi toplamaz.
+              NineCells es apta para todas las edades y no recopila intencionalmente información de menores.
             </p>
           </section>
 
           <section>
             <h2 className="mb-3 text-xl font-light text-white">
-              6. Bu Politikadaki Değişiklikler
+              6. Cambios en esta política
             </h2>
             <p>
-              Bu politika, yeni Uygulama özelliklerini veya yasal gereklilikleri yansıtmak üzere zaman zaman güncellenebilir. En güncel sürüm her zaman bu adreste bulunur.
+              Esta política puede actualizarse de vez en cuando para reflejar nuevas funciones o requisitos legales. La versión más reciente siempre estará disponible en esta URL.
             </p>
           </section>
 
           <section>
             <h2 className="mb-3 text-xl font-light text-white">
-              7. İletişim
+              7. Contacto
             </h2>
             <p>
-              Bu Gizlilik Politikası hakkında sorularınız için iletişim:
+              Para preguntas sobre esta política, contáctanos:
             </p>
             <p className="mt-2">
               <a
@@ -108,7 +108,9 @@ export default function NineCellsPrivacyTR() {
             English
           </Link>
           <span>•</span>
-          <span className="text-neutral-300">Türkçe</span>
+          <Link href="/ninecells/privacy-tr" className="hover:text-neutral-300">
+            Türkçe
+          </Link>
           <span>•</span>
           <Link href="/ninecells/privacy-pt" className="hover:text-neutral-300">
             Português
@@ -146,9 +148,7 @@ export default function NineCellsPrivacyTR() {
             Русский
           </Link>
           <span>•</span>
-          <Link href="/ninecells/privacy-es-mx" className="hover:text-neutral-300">
-            Español (MX)
-          </Link>
+          <span className="text-neutral-300">Español (MX)</span>
           <span>•</span>
           <Link href="/ninecells/privacy-ar" className="hover:text-neutral-300">
             العربية
@@ -169,7 +169,7 @@ export default function NineCellsPrivacyTR() {
 
         {/* Footer */}
         <div className="mt-12 text-center text-xs text-neutral-600">
-          <p>© 2026 Yigit Karabulut. Tüm hakları saklıdır.</p>
+          <p>© 2026 Yigit Karabulut. Todos los derechos reservados.</p>
           <Link
             href="https://karabulut.work"
             className="mt-2 inline-block hover:text-neutral-400"
